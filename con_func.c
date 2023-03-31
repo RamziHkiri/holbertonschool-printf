@@ -32,6 +32,17 @@ int print_s(va_list params)
 		{
 			putchar(s[i]);
 		}
+
+	}
+	else
+	{
+		putchar('(');
+		putchar('n');
+		putchar('u');
+		putchar('l');
+		putchar('l');
+		putchar(')');
+		i = 6;
 	}
 	return (i);
 }
