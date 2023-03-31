@@ -58,6 +58,5 @@ int _printf(const char *format, ...)
 	format++;
 	}
 	va_end(params);
-	printf("%d", leng);
 return (leng);
 }
