@@ -7,29 +7,29 @@
  *@format: string or the mesage to print
  * Return:none
  */
+void init(const char *format, int leng)
+{
+	putchar('%');
+	putchar(*format);
+	leng += 2;
+}
 int _printf(const char *format, ...)
 {
-	int i, leng, l, up, state = 0;
+	int i, leng, up = 0, state = 0;
 	va_list params;
-	print_by_t pbt[] = {
-		{"s", print_s},
-		{"c", print_c}
-	};
+	print_by_t pbt[] = {{"s", print_s}, {"c", print_c}};
+
 	va_start(params, format);
 	while (*format)
 	{
 		if (state == 0)
-		{
 			if (*format == '%')
-			{
 				state = 1;
-			}
 			else
 			{
 				leng++;
 				putchar(*format);
 			}
-		}
 		else
 		{
 			if (*format == '%')
@@ -38,7 +38,6 @@ int _printf(const char *format, ...)
 				putchar('%');
 				state = 0;
 			}
-
 			else
 			{
 				up = 0;
@@ -46,20 +45,16 @@ int _printf(const char *format, ...)
 					if (*format == *(pbt[i].symb))
 					{
 						up = 1;
-						l = pbt[i].func(params);
-						leng += l;
+						leng += pbt[i].func(params);
 						state = 0;
 					}
 				if (up == 0)
-				{
-					putchar('%');
-					putchar(*format);
-					l += 2;
-				}
+					init(format, leng);
 			}
 			state = 0;
 		}
 	format++;
 	}
+	va_end(params);
 return (leng);
 }
