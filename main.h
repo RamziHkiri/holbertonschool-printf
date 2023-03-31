@@ -1,6 +1,9 @@
 #ifndef MAIN_H
 #define MAIN_H
-void _printf(const char *format,...);
+int _printf(const char *format,...);
+void print_c(va_list params);
+void print_s(va_list params);
+
 typedef struct printer
 {
 char *symb;
