@@ -7,7 +7,7 @@
  *@format: string or the mesage to print
  * Return:none
  */
-void _printf(const char *format, ...)
+int _printf(const char *format, ...)
 {
 	int i, state = 0;
 	va_list params;
@@ -48,5 +48,5 @@ void _printf(const char *format, ...)
 		}
 	format++;
 	}
-	putchar('\n');
+return (0);
 }
