@@ -7,19 +7,20 @@
  * @params:variadic arguments
  * Return:none
  */
-void print_c(va_list params)
+int print_c(va_list params)
 {
 	char c;
 
 	c = va_arg(params, int);
 	putchar(c);
+	return (1);
 }
 /**
  * print_s - print string
  * @params:variadic arguments
  * Return:none
  */
-void print_s(va_list params)
+int print_s(va_list params)
 {
 	int i;
 	char *s;
@@ -32,4 +33,5 @@ void print_s(va_list params)
 			putchar(s[i]);
 		}
 	}
+	return (i);
 }
