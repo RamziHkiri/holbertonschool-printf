@@ -9,7 +9,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, state = 0;
+	int i, leng, l, up, state = 0;
 	va_list params;
 	print_by_t pbt[] = {
 		{"s", print_s},
@@ -26,6 +26,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
+				leng++;
 				putchar(*format);
 			}
 		}
@@ -33,20 +34,32 @@ int _printf(const char *format, ...)
 		{
 			if (*format == '%')
 			{
+				leng++;
 				putchar('%');
 				state = 0;
 			}
+
 			else
 			{
+				up = 0;
 				for (i = 0 ; i < 2 ; i++)
 					if (*format == *(pbt[i].symb))
 					{
-						pbt[i].func(params);
+						up = 1;
+						l = pbt[i].func(params);
+						leng += l;
 						state = 0;
 					}
+				if (up == 0)
+				{
+					putchar('%');
+					putchar(*format);
+					l += 2;
+				}
 			}
+			state = 0;
 		}
 	format++;
 	}
-return (0);
+return (leng);
 }
