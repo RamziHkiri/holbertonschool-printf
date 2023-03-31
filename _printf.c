@@ -13,9 +13,17 @@ void init(const char *format, int leng)
 	putchar(*format);
 	leng += 2;
 }
+int init1(int state, int leng)
+{
+	leng++;
+	putchar('%');
+	state = 0;
+	return (state);
+}
+
 int _printf(const char *format, ...)
 {
-	int i, leng, up = 0, state = 0;
+	int i, leng = 0, up = 0, state = 0;
 	va_list params;
 	print_by_t pbt[] = {{"s", print_s}, {"c", print_c}};
 
@@ -33,11 +41,7 @@ int _printf(const char *format, ...)
 		else
 		{
 			if (*format == '%')
-			{
-				leng++;
-				putchar('%');
-				state = 0;
-			}
+				init1(state, leng);
 			else
 			{
 				up = 0;
