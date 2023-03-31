@@ -13,17 +13,15 @@ void init(const char *format, int leng)
 	putchar(*format);
 	leng += 2;
 }
-int init1(int state, int leng)
+void init1(int leng)
 {
 	leng++;
 	putchar('%');
-	state = 0;
-	return (state);
 }
 
 int _printf(const char *format, ...)
 {
-	int i, leng = 0, up = 0, state = 0;
+	int i, leng = 0, state = 0;
 	va_list params;
 	print_by_t pbt[] = {{"s", print_s}, {"c", print_c}};
 
@@ -41,24 +39,25 @@ int _printf(const char *format, ...)
 		else
 		{
 			if (*format == '%')
-				init1(state, leng);
+			{	init1(leng);
+				leng++;
+			}
 			else
 			{
-				up = 0;
-				for (i = 0 ; i < 2 ; i++)
+				if (*format != 'c' && *format != 's')
+				{	init(format, leng);
+					leng += 2;
+				}
+				else
+					for (i = 0 ; i < 2 ; i++)
 					if (*format == *(pbt[i].symb))
-					{
-						up = 1;
 						leng += pbt[i].func(params);
-						state = 0;
-					}
-				if (up == 0)
-					init(format, leng);
 			}
 			state = 0;
 		}
 	format++;
 	}
 	va_end(params);
+	printf("%d", leng);
 return (leng);
 }
