@@ -4,10 +4,12 @@
 #include<stdio.h>
 #include"main.h"
 /**
- * _printf - same as printf
+ * init - same as printf
  *@format: string or the mesage to print
+ *@leng:lenght of the format
  * Return:none
  */
+
 void init(const char *format, int leng)
 {
 	putchar('%');
@@ -16,7 +18,7 @@ void init(const char *format, int leng)
 }
 /**
  * init1 - initialize some param
- * @leng:
+ * @leng:length of the format
  *
  */
 void init1(int leng)
@@ -24,6 +26,11 @@ void init1(int leng)
 	leng++;
 	putchar('%');
 }
+/**
+ * _printf - same as printf
+ *@format: string or the mesage to print
+ * Return:none
+ */
 
 int _printf(const char *format, ...)
 {
@@ -31,14 +38,14 @@ int _printf(const char *format, ...)
 	va_list params;
 	print_by_t pbt[] = {{"s", print_s}, {"c", print_c}};
 
-	va_start(params, format);
 	if (format == NULL || (strlen(format) == 1 && *format == '%'))
 			return (-1);
 	else
 	{
 	va_start(params, format);
 	while (*format)
-	{	if (state == 0)
+	{
+		if (state == 0)
 			if (*format == '%')
 				state = 1;
 			else
@@ -46,12 +53,13 @@ int _printf(const char *format, ...)
 				putchar(*format);
 			}
 		else
-		{if (*format == '%')
+		{
+			if (*format == '%')
 			{	init1(leng);
 				leng++;
 			}
 			else
-			{	
+			{
 				if (*format != 'c' && *format != 's')
 				{	init(format, leng);
 					leng += 2;
