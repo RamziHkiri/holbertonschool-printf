@@ -58,7 +58,7 @@ int print_d(va_list list)
 
 	if (num1 < 0)
 	{
-		_putchar('-');
+		putchar('-');
 		i++;
 		num1 *= -1;
 	}
@@ -72,7 +72,7 @@ int print_d(va_list list)
 	{
 		num2 = num1 % div;
 		num1 /= div;
-		_putchar(num1 + '0');
+		putchar(num1 + '0');
 		num1 = num2;
 		div /= 10;
 		i++;
