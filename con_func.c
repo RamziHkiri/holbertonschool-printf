@@ -5,7 +5,7 @@
 /**
  * print_c - print character
  * @params:variadic arguments
- * Return:none
+ * Return:length of the result
  */
 int print_c(va_list params)
 {
@@ -43,6 +43,39 @@ int print_s(va_list params)
 		putchar('l');
 		putchar(')');
 		i = 6;
+	}
+	return (i);
+}
+/**
+ * print_d - print integer
+ * @params: variadic argumets
+ * Return:length of the result
+ */
+int print_d(va_list list)
+{
+	int num1 = va_arg(list, int), num2;
+	int div = 1, i = 0;
+
+	if (num1 < 0)
+	{
+		_putchar('-');
+		i++;
+		num1 *= -1;
+	}
+	num2 = num1;
+	while (num2 > 9)
+	{
+		div *= 10;
+		num2 = num2 / 10;
+	}
+	while (div >= 1)
+	{
+		num2 = num1 % div;
+		num1 /= div;
+		_putchar(num1 + '0');
+		num1 = num2;
+		div /= 10;
+		i++;
 	}
 	return (i);
 }
