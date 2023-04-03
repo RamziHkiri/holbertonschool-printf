@@ -35,7 +35,7 @@ void init1(int leng)
 int test(const char *format, va_list params)
 {
 	int i, leng = 0;
-	print_by_t pbt[] = {{"s", print_s}, {"c", print_c}};
+	print_by_t pbt[] = {{"s", print_s}, {"c", print_c}, {"d", print_d}, {"i",print_d}};
 
 	if (*format != 'c' && *format != 's')
 	{
