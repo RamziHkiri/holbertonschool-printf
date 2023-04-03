@@ -32,8 +32,8 @@ int _printf(const char *format, ...)
 	print_by_t pbt[] = {{"s", print_s}, {"c", print_c}};
 
 	va_start(params, format);
-	if (!format || (strlen(format) == 1 && *format == '%'))
-			return (1);
+	if (format == NULL || (strlen(format) == 1 && *format == '%'))
+			return (-1);
 	else
 	{
 	va_start(params, format);
