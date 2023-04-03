@@ -14,6 +14,11 @@ void init(const char *format, int leng)
 	putchar(*format);
 	leng += 2;
 }
+/**
+ * init1 - initialize some param
+ * @leng:
+ *
+ */
 void init1(int leng)
 {
 	leng++;
@@ -28,7 +33,7 @@ int _printf(const char *format, ...)
 
 	va_start(params, format);
 	if (!format || (strlen(format) == 1 && *format == '%'))
-			return (0);
+			return (1);
 	else
 	{
 	va_start(params, format);
