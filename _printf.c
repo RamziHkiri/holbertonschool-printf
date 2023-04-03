@@ -27,6 +27,28 @@ void init1(int leng)
 	putchar('%');
 }
 /**
+ * test - test the occurence of the specifier or no
+ * @format: string to test
+ * @params:va_list
+ * Return:none
+ */
+int test(const char *format, va_list params)
+{
+	int i, leng = 0;
+	print_by_t pbt[] = {{"s", print_s}, {"c", print_c}};
+
+	if (*format != 'c' && *format != 's')
+	{
+		init(format, leng);
+		leng += 2;
+	}
+	else
+		for (i = 0 ; i < 2 ; i++)
+			if (*format == *(pbt[i].symb))
+			leng = pbt[i].func(params);
+	return (leng);
+}
+/**
  * _printf - same as printf
  *@format: string or the mesage to print
  * Return:none
@@ -34,12 +56,13 @@ void init1(int leng)
 
 int _printf(const char *format, ...)
 {
-	int i, leng = 0, state = 0;
+	int leng = 0, state = 0;
 	va_list params;
-	print_by_t pbt[] = {{"s", print_s}, {"c", print_c}};
 
 	if (format == NULL || (strlen(format) == 1 && *format == '%'))
-			return (-1);
+	{
+		return (-1);
+	}
 	else
 	{
 	va_start(params, format);
@@ -59,16 +82,7 @@ int _printf(const char *format, ...)
 				leng++;
 			}
 			else
-			{
-				if (*format != 'c' && *format != 's')
-				{	init(format, leng);
-					leng += 2;
-				}
-				else
-					for (i = 0 ; i < 2 ; i++)
-					if (*format == *(pbt[i].symb))
-						leng += pbt[i].func(params);
-			}
+				leng += test(format, params);
 			state = 0;
 		}
 	format++;
