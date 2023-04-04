@@ -51,11 +51,12 @@ int print_s(va_list params)
  * @params: variadic argumets
  * Return:length of the result
  */
-int print_d(va_list list)
+int print_d(va_list params)
 {
-	int num1 = va_arg(list, int), num2;
+	long int num2, num1;
 	int div = 1, i = 0;
 
+	num1 = va_arg(params,  int);
 	if (num1 < 0)
 	{
 		putchar('-');
@@ -68,7 +69,7 @@ int print_d(va_list list)
 		div *= 10;
 		num2 = num2 / 10;
 	}
-	while (div >= 1)
+	while (div > 0)
 	{
 		num2 = num1 % div;
 		num1 /= div;
