@@ -48,7 +48,7 @@ int test(const char *format, va_list params)
 		leng += 2;
 	}
 	else
-		for (i = 0 ; i < 2 ; i++)
+		for (i = 0 ; i < 4 ; i++)
 			if (*format == *(pbt[i].symb))
 			leng = pbt[i].func(params);
 	return (leng);
